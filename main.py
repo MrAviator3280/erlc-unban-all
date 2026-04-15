@@ -79,7 +79,7 @@ def handle_rate_limit(response) -> bool:
         clear_line()
         print(f"Rate-limited (429). Retrying in {retry_after:.1f}s …")
         time.sleep(retry_after)
-        return True  # signal: retry
+        return True #retry
 
     remaining = response.headers.get("X-RateLimit-Remaining")
     reset_ts  = response.headers.get("X-RateLimit-Reset")
@@ -173,7 +173,6 @@ def run_unbans(batches: list[dict]):
                 sleep_for = FALLBACK_WAIT_SECONDS
             time.sleep(sleep_for)
 
-    # Final bar at 100 %
     clear_line()
     sys.stdout.write(f"\r  {progress_bar(total, total)}\n")
     sys.stdout.flush()
@@ -217,11 +216,9 @@ def main():
 
     print()
 
-    # ── Step 4: run unbans ────────────────────────────────────
     print("● Sending :unban commands …")
     success, failed, errors = run_unbans(batches)
 
-    # ── Summary ───────────────────────────────────────────────
     print()
     print("╔══════════════════════════════════════════╗")
     print("║                 Summary                  ║")
